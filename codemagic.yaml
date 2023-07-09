@@ -40,7 +40,7 @@ workflows:
             -password ${UNITY_PASSWORD?}
       - name: Increment build number
         script: |
-          BUILD_NUMBER=($(app-store-connect get-latest-app-store-build-number "$APP_ID") + 1)
+          BUILD_NUMBER=3
           cd $UNITY_IOS_DIR
           agvtool new-version -all $BUILD_NUMBER
       - name: Generate the Xcode project from Unity
