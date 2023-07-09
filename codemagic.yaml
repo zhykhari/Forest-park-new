@@ -38,6 +38,11 @@ workflows:
             -serial ${UNITY_SERIAL?} \
             -username ${UNITY_EMAIL?} \
             -password ${UNITY_PASSWORD?}
+       - name: Set the build number
+        script: | 
+          BUILD_NUMBER=($(app-store-connect get-latest-app-store-build-number "$APP_ID") + 1)
+          cd ios
+          agvtool new-version -all $BUILD_NUMBER
       - name: Generate the Xcode project from Unity
         script: |
           $UNITY_HOME/Contents/MacOS/Unity -batchmode -quit -logFile \
