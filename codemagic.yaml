@@ -38,11 +38,6 @@ workflows:
             -serial ${UNITY_SERIAL?} \
             -username ${UNITY_EMAIL?} \
             -password ${UNITY_PASSWORD?}
-      - name: Increment build number
-        script: |
-          BUILD_NUMBER=3
-          cd $UNITY_IOS_DIR
-          agvtool new-version -all $BUILD_NUMBER
       - name: Generate the Xcode project from Unity
         script: |
           $UNITY_HOME/Contents/MacOS/Unity -batchmode -quit -logFile \
@@ -54,6 +49,11 @@ workflows:
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles
+      - name: Increment build number
+        script: |
+          BUILD_NUMBER=3
+          cd $UNITY_IOS_DIR
+          agvtool new-version -all $BUILD_NUMBER
       - name: Build ipa for distribution
         script: |
           xcode-project build-ipa \
