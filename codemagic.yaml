@@ -38,7 +38,7 @@ workflows:
             -serial ${UNITY_SERIAL?} \
             -username ${UNITY_EMAIL?} \
             -password ${UNITY_PASSWORD?}
-       - name: Set the build number
+      - name: Set the build number
         script: | 
           BUILD_NUMBER=($(app-store-connect get-latest-app-store-build-number "$APP_ID") + 1)
           cd ios
